@@ -43,9 +43,6 @@ class TrailerViewController: UIViewController, WKUIDelegate {
                 
                     self.videos = dataDictionary["results"] as! [[String:Any]]
                     
-                    
-                   
-        
                     //print(self.videos)
                     print(self.videos[0]["key"] as! String)
                     let base_video = "https://www.youtube.com/watch?v="
@@ -53,23 +50,11 @@ class TrailerViewController: UIViewController, WKUIDelegate {
                     let trailerUrl = URL(string:base_video + movie_key)
                     let myRequest = URLRequest(url: trailerUrl!)
                     self.webView.load(myRequest)
-                   
-                  // self.tableView.reloadData()
-                   
-                   // print(dataDictionary)
-                     // TODO: Store the movies in a property to use elsewhere
-                     // TODO: Reload your table view data
 
+                   
                   }
                }
                task.resume()
-                //
-                //let key = self.videos[0]["key"] as! String
-               // let movie_key = self.videos[0]["key"] as! String
-                //let trailerUrl = URL(string:base_video + movie_key)
-              // print(videos[0]["key"] as! String)//
-               // let myRequest = URLRequest(url: trailerUrl!)
-               // webView.load(myRequest)
     }
     
 
