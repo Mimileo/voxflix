@@ -43,14 +43,18 @@ class TrailerViewController: UIViewController, WKUIDelegate {
                 
                     self.videos = dataDictionary["results"] as! [[String:Any]]
                     
-                    //print(self.videos)
-                    print(self.videos[0]["key"] as! String)
-                    let base_video = "https://www.youtube.com/watch?v="
-                    let movie_key = self.videos[0]["key"] as! String
-                    let trailerUrl = URL(string:base_video + movie_key)
-                    let myRequest = URLRequest(url: trailerUrl!)
-                    self.webView.load(myRequest)
-
+                    if(self.videos.count > 0){
+                    
+                        //print(self.videos)
+                        print(self.videos[0]["key"] as! String)
+                        let base_video = "https://www.youtube.com/watch?v="
+                        let movie_key = self.videos[0]["key"] as! String
+                        let trailerUrl = URL(string:base_video + movie_key)
+                        let myRequest = URLRequest(url: trailerUrl!)
+                        self.webView.load(myRequest)
+                    } else { // handle if there are no videos available
+                        self.webView.loadHTMLString("<h1 style='font-size:3em;font-family: Helvetica; 20;text-align: center;padding-top:3em;'>No trailer available fo this movie yet. D:<h1>",baseURL:  nil)
+                    }
                    
                   }
                }
