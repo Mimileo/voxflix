@@ -18,7 +18,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Hello")
+        // print("Hello")
         tableView.dataSource = self
         tableView.delegate = self
         self.tableView.rowHeight = UITableView.automaticDimension;
@@ -41,7 +41,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             
             self.tableView.reloadData()
             
-            print(dataDictionary)
+            // print(dataDictionary)
               // TODO: Store the movies in a property to use elsewhere
               // TODO: Reload your table view data
 
@@ -63,7 +63,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         cell.titleLabel.text = title
         cell.synopsisLabel.text = synopsis
-        
+    
         let baseUrl = "https://image.tmdb.org/t/p/w185"
         let posterPath = movie["poster_path"] as! String
         let posterUrl = URL(string: baseUrl + posterPath)
@@ -73,14 +73,29 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        print("Loading the details screen")
+        
+        // find the selected movie
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        let movie = movies[indexPath.row]
+        
+        // pass selected movie to details view controller
+        // segue.destination returns View controller so downcast to MovieDetailsViewController
+        let detailsViewController = segue.destination as! MovieDetailsViewController
+        // set the movie property of th details view controller
+        detailsViewController.movie = movie
+        
+        // when transitioning do leave highlighted
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-    */
+    
 
 }
